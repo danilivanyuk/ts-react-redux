@@ -1,0 +1,22 @@
+{
+    "user": [
+      { "id": 1, "username": "admin", "password": "admin" },
+      { "id": 2, "username": "johndoe", "password": "A123456" },
+      { "id": 3, "username": "samsmith", "password": "!vks2453" },
+      { "id": 4, "username": "vasyapupkin", "password": "somepassword" }
+    ],
+    "contacts": [
+      { "id": 1, "userId": 1, "name": "Max", "phone": "+77051234567"},
+      { "id": 2, "userId": 1, "name": "Jane", "phone": "+763192010458"},
+      { "id": 3, "userId": 1, "name": "Teresa", "phone": "+19105730268"},
+      { "id": 4, "userId": 2, "name": "Denis", "phone": "+86152740910"},
+      { "id": 5, "userId": 2, "name": "Andrew", "phone": "+28365110407"},
+      { "id": 6, "userId": 2, "name": "Noah", "phone": "+63102517408"},
+      { "id": 7, "userId": 3, "name": "Oliver", "phone": "+81095104237"},
+      { "id": 8, "userId": 3, "name": "Emma", "phone": "+86310729054"},
+      { "id": 9, "userId": 3, "name": "Liam", "phone": "+17108269504"},
+      { "id": 10, "userId": 4, "name": "Charlotte", "phone": "+5724019683"},
+      { "id": 11, "userId": 4, "name": "Amelia", "phone": "+29730810415"},
+      { "id": 12, "userId": 4, "name": "Henry", "phone": "+31540781019"}
+    ]
+  }
