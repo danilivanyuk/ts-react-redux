@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Contacts from './app/Contacts';
 import { useAppDispatch, useAppSelector } from './features/hooks'
 import { getUser } from './features/userSlice';
@@ -7,16 +7,14 @@ export default function App() {
   const {user} = useAppSelector(state => state.userReducer)
   const dispatch = useAppDispatch()
   
-  console.log(user);
+  console.log(user[0]);
   let arg = {'username':'', 'password':''}
-  useEffect(() =>{
-    // dispatch(getUser('admin'))
-  }, [])
+
   
   return (
     <div>
       {user.length > 0 ? 
-      <Contacts/>
+      <Contacts userId = {user[0].id}/>
       :
       <div>
         
