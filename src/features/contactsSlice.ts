@@ -32,7 +32,10 @@ const contactsSlice = createSlice({
             state.contacts = state.contacts.filter(obj => {
                 return obj.id !== action.payload;
               });
-        }
+        },
+        addContact(state, action: PayloadAction<any>){
+            state.contacts.push(action.payload)
+        },
     },
     extraReducers: (builder)=>{
         builder.addCase(getUserContacts.pending, (state)=>{
@@ -48,5 +51,5 @@ const contactsSlice = createSlice({
     }
 })
 
-export const { deleteContact } = contactsSlice.actions
+export const { deleteContact, addContact } = contactsSlice.actions
 export default contactsSlice.reducer;
