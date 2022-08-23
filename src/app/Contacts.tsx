@@ -3,29 +3,37 @@ import {
   getUserContacts,
   deleteContact,
   addContact,
+  filterContacts,
 } from "../features/contactsSlice";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
+import ContactsView from "./ContactsView";
+import FilteredContactsView from "./FilteredContactsView";
 
 interface IContactsComponentArg {
   userId: number;
 }
 
 export default function Contacts(parentData: IContactsComponentArg) {
-  const [createContactForm, setCreateContactForm] = useState(true);
+  const [createContactForm, setCreateContactForm] = useState(false);
   const dispatch = useAppDispatch();
   const userId = parentData.userId;
-  const { contacts } = useAppSelector((state) => state.contactsReducer);
+  const { contacts, filteredContacts } = useAppSelector(
+    (state) => state.contactsReducer
+  );
   let newId;
   useEffect(() => {
     dispatch(getUserContacts(userId));
   }, []);
+
+  useEffect(() => {
+    dispatch;
+  });
 
   const handleContactFormState = () => {
     createContactForm
       ? setCreateContactForm(false)
       : setCreateContactForm(true);
   };
-  console.log(contacts);
 
   const [newContactName, setNewContactName] = useState("");
   const [newContactPhone, setNewContactPhone] = useState("");
@@ -36,7 +44,6 @@ export default function Contacts(parentData: IContactsComponentArg) {
     name: "",
     phone: "",
   });
-  console.log(newContact);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,6 +52,8 @@ export default function Contacts(parentData: IContactsComponentArg) {
     setNewContact({ ...newContact, id: Math.random() * 10 });
     dispatch(addContact(newContact));
   };
+
+  console.log(filteredContacts, filteredContacts.length);
 
   return (
     <div>
@@ -97,8 +106,8 @@ export default function Contacts(parentData: IContactsComponentArg) {
       <div>
         <input
           type="text"
-          onChange={() => {
-            contacts;
+          onChange={(e) => {
+            dispatch(filterContacts(e.target.value));
           }}
         />
       </div>
@@ -110,19 +119,11 @@ export default function Contacts(parentData: IContactsComponentArg) {
         {createContactForm ? "Cancel" : "Add Contact"}
       </button>
       <div>
-        {Object(contacts).map((contact: any) => (
-          <div key={contact.id}>
-            <div>{contact.id}</div>
-            <div>{contact.name}</div>
-            <div>{contact.phone}</div>
-            <div>
-              <button>Edit</button>
-              <button onClick={() => dispatch(deleteContact(contact.id))}>
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+        {filteredContacts.length > 0 ? (
+          <FilteredContactsView filteredContacts={filteredContacts} />
+        ) : (
+          <ContactsView contacts={contacts} />
+        )}
       </div>
     </div>
   );

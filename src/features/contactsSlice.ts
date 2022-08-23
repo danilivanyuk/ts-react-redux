@@ -4,12 +4,14 @@ import {IContact} from '../models/IContact'
 
 interface ContactState{
     contacts: IContact[];
+    filteredContacts: IContact[];
     isLoading:boolean,
     error: null | string
 }
 
 const initialState: ContactState ={
     contacts:[],
+    filteredContacts:[],
     isLoading: false,
     error: ''
 }
@@ -36,6 +38,10 @@ const contactsSlice = createSlice({
         addContact(state, action: PayloadAction<any>){
             state.contacts.push(action.payload)
         },
+        filterContacts(state,action:PayloadAction<any>){
+            state.filteredContacts = state.contacts.filter((contact) => contact.name.toLocaleLowerCase().includes(action.payload.toLowerCase()))
+            
+        }
     },
     extraReducers: (builder)=>{
         builder.addCase(getUserContacts.pending, (state)=>{
@@ -51,5 +57,5 @@ const contactsSlice = createSlice({
     }
 })
 
-export const { deleteContact, addContact } = contactsSlice.actions
+export const { deleteContact, addContact, filterContacts } = contactsSlice.actions
 export default contactsSlice.reducer;
