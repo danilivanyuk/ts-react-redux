@@ -5,10 +5,11 @@ import { addContact, editContact } from "../features/contactsSlice";
 interface IContactForm {
   type: string;
   contact?: any;
+  handleFormState?: any;
 }
 
 export default function ContactForm(parentData: IContactForm) {
-  const { type, contact } = parentData;
+  const { type, contact, handleFormState } = parentData;
   const dispatch = useAppDispatch();
 
   const [newContact, setNewContact] = useState(
@@ -32,6 +33,7 @@ export default function ContactForm(parentData: IContactForm) {
     } else {
       dispatch(editContact(newContact));
     }
+    handleFormState();
   };
 
   return (
@@ -65,7 +67,7 @@ export default function ContactForm(parentData: IContactForm) {
         />
         <div>
           <button type="submit">
-            {type === "edit" ? "Confirm" : "Add contact"}
+            {type === "edit" ? "Confirm" : "Add Contact"}
           </button>
         </div>
       </form>

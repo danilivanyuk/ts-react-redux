@@ -35,7 +35,13 @@ export default function Contacts(parentData: IContactsComponentArg) {
 
   return (
     <div>
-      <div>{createContactForm ? <ContactForm type="add" /> : ""}</div>
+      <div>
+        {createContactForm ? (
+          <ContactForm type="add" handleFormState={handleContactFormState} />
+        ) : (
+          ""
+        )}
+      </div>
       <div>
         <input
           type="text"

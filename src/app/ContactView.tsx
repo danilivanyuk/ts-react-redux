@@ -19,7 +19,11 @@ export default function ContactView(parentData: IContact) {
     <div key={contact.id}>
       {editContactForm ? (
         <div>
-          <ContactForm type="edit" contact={contact} />
+          <ContactForm
+            type="edit"
+            contact={contact}
+            handleFormState={handleContactEditFormState}
+          />
           <button
             onClick={() => {
               handleContactEditFormState();
