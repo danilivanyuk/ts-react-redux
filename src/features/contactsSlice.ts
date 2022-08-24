@@ -41,6 +41,14 @@ const contactsSlice = createSlice({
         filterContacts(state,action:PayloadAction<any>){
             state.filteredContacts = state.contacts.filter((contact) => contact.name.toLocaleLowerCase().includes(action.payload.toLowerCase()))
             
+        },
+        editContact(state, action: PayloadAction<any>){
+            const contactToEdit = state.contacts.find((contact) => contact.id === action.payload.id)
+            if (contactToEdit) {
+                
+                contactToEdit.name = action.payload.name
+                contactToEdit.phone = action.payload.phone
+            }
         }
     },
     extraReducers: (builder)=>{
@@ -57,5 +65,5 @@ const contactsSlice = createSlice({
     }
 })
 
-export const { deleteContact, addContact, filterContacts } = contactsSlice.actions
+export const { deleteContact, addContact, filterContacts, editContact } = contactsSlice.actions
 export default contactsSlice.reducer;

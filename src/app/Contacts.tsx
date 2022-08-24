@@ -59,7 +59,9 @@ export default function Contacts(parentData: IContactsComponentArg) {
           // {Object(contacts).map()}
           <div>
             {Object(contacts).map((contact: any) => (
-              <ContactView contact={contact} />
+              <div key={contact.id}>
+                <ContactView contact={contact} />
+              </div>
             ))}
           </div>
         )}

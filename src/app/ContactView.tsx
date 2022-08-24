@@ -8,7 +8,6 @@ interface IContact {
 
 export default function ContactView(parentData: IContact) {
   const { contact } = parentData;
-  console.log(contact);
 
   const [editContactForm, setEditContactForm] = useState(false);
   const dispatch = useAppDispatch();

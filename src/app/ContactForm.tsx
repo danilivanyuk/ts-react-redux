@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
-import { addContact } from "../features/contactsSlice";
+import { addContact, editContact } from "../features/contactsSlice";
 
 interface IContactForm {
   type: string;
@@ -11,20 +11,27 @@ export default function ContactForm(parentData: IContactForm) {
   const { type, contact } = parentData;
   const dispatch = useAppDispatch();
 
-  const [newContact, setNewContact] = useState({
-    id: Math.random() * 10,
-    userId: useAppSelector((state) => state.userReducer.user[0].id),
-    name: "",
-    phone: "",
-  });
-  console.log(newContact);
+  const [newContact, setNewContact] = useState(
+    type === "add"
+      ? {
+          id: Math.random() * 10,
+          userId: useAppSelector((state) => state.userReducer.user[0].id),
+          name: "",
+          phone: "",
+        }
+      : contact
+  );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     target.reset();
-    setNewContact({ ...newContact, id: Math.random() * 10 });
-    dispatch(addContact(newContact));
+    if (type === "add") {
+      setNewContact({ ...newContact, id: Math.random() * 10 });
+      dispatch(addContact(newContact));
+    } else {
+      dispatch(editContact(newContact));
+    }
   };
 
   return (
@@ -33,7 +40,7 @@ export default function ContactForm(parentData: IContactForm) {
         <input
           name="ContactName"
           type="text"
-          value={type === "edit" ? contact.name : ""}
+          value={newContact.name}
           minLength={2}
           maxLength={15}
           onChange={(e) =>
@@ -44,7 +51,7 @@ export default function ContactForm(parentData: IContactForm) {
         <input
           name="ContactPhone"
           type="text"
-          value={type === "edit" ? contact.phone : ""}
+          value={newContact.phone}
           minLength={10}
           maxLength={11}
           onKeyPress={(e) => {
