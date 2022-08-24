@@ -29,6 +29,7 @@ export default function ContactForm(parentData: IContactForm) {
         }
       : contact
   );
+  console.log(type, contact);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,8 +50,7 @@ export default function ContactForm(parentData: IContactForm) {
         component="form"
         onSubmit={handleSubmit}
         noValidate
-        alignItems="center"
-        sx={{ ml: type === "add" ? "0" : "36%", mt: 1, width: "100%" }}
+        sx={{ mt: 1, width: "100%" }}
       >
         <Grid justifyContent="center" alignItems="center" container spacing={2}>
           <Grid item xs={12} sm={6}>

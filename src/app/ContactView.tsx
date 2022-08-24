@@ -25,6 +25,8 @@ export default function ContactView(parentData: IContact) {
   const handleContactEditFormState = () => {
     editContactForm ? setEditContactForm(false) : setEditContactForm(true);
   };
+  console.log(contact);
+
   return (
     <>
       {editContactForm ? (
@@ -35,11 +37,17 @@ export default function ContactView(parentData: IContact) {
         />
       ) : (
         <>
-          <TableCell component="th" scope="row">
+          <TableCell
+            component="th"
+            scope="row"
+            sx={{ border: 0, width: "25%" }}
+          >
             {contact.name}
           </TableCell>
-          <TableCell align="right">{contact.phone}</TableCell>
-          <TableCell align="right">
+          <TableCell align="right" sx={{ border: 0, width: "25%" }}>
+            {contact.phone}
+          </TableCell>
+          <TableCell align="right" sx={{ border: 0, width: "25%" }}>
             <Button
               onClick={() => {
                 handleContactEditFormState();
@@ -48,7 +56,7 @@ export default function ContactView(parentData: IContact) {
               Edit
             </Button>
           </TableCell>
-          <TableCell align="right">
+          <TableCell align="right" sx={{ border: 0, width: "25%" }}>
             <Button onClick={() => dispatch(deleteContact(contact.id))}>
               Delete
             </Button>

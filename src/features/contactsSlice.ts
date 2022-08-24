@@ -34,7 +34,12 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     deleteContact(state, action: PayloadAction<number>) {
+      console.log(action.payload);
+
       state.contacts = state.contacts.filter((obj) => {
+        return obj.id !== action.payload;
+      });
+      state.filteredContacts = state.filteredContacts.filter((obj) => {
         return obj.id !== action.payload;
       });
     },

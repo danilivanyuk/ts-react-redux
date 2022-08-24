@@ -78,40 +78,31 @@ export default function Contacts(parentData: IContactsComponentArg) {
         </Button>
       </div>
 
-      <div>
-        <div>
-          <Box sx={{ width: "100%" }}>
-            <TableContainer component={Paper}>
-              <Table
-                sx={{ minWidth: 650, position: "relative" }}
-                aria-label="simple table"
-              >
-                <TableHead>
-                  <TableRow>
-                    {/* <TableCell></TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="right"></TableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Object(
-                    filteredContacts.length > 0 ? filteredContacts : contacts
-                  ).map((contact: any) => (
-                    <TableRow
-                      key={contact.id}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <ContactView contact={contact} />
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
-        </div>
+      <div
+        style={{
+          width: "100% !important",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        {Object(filteredContacts.length > 0 ? filteredContacts : contacts).map(
+          (contact: any) => (
+            <TableRow
+              key={contact.id}
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                border: 0,
+                alignItems: "center",
+              }}
+            >
+              <ContactView contact={contact} />
+            </TableRow>
+          )
+        )}
       </div>
     </Container>
   );
