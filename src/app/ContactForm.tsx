@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { addContact, editContact } from "../features/contactsSlice";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 interface IContactForm {
   type: string;
@@ -37,40 +44,65 @@ export default function ContactForm(parentData: IContactForm) {
   };
 
   return (
-    <div>
-      <form action="#" onSubmit={handleSubmit}>
-        <input
-          name="ContactName"
-          type="text"
-          value={newContact.name}
-          minLength={2}
-          maxLength={15}
-          onChange={(e) =>
-            setNewContact({ ...newContact, name: e.target.value })
-          }
-        />
+    <div style={{ width: "100%" }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        alignItems="center"
+        sx={{ ml: type === "add" ? "0" : "36%", mt: 1, width: "100%" }}
+      >
+        <Grid justifyContent="center" alignItems="center" container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="ContactName"
+              label="Name"
+              name="ContactName"
+              value={newContact.name}
+              autoFocus
+              onChange={(e) =>
+                setNewContact({ ...newContact, name: e.target.value })
+              }
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="ContactPhone"
+              label="Phone"
+              name="ContactPhone"
+              value={newContact.phone}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              onChange={(e) =>
+                setNewContact({ ...newContact, phone: e.target.value })
+              }
+            />
+          </Grid>
+        </Grid>
 
-        <input
-          name="ContactPhone"
-          type="text"
-          value={newContact.phone}
-          minLength={10}
-          maxLength={11}
-          onKeyPress={(e) => {
-            if (!/[0-9]/.test(e.key)) {
-              e.preventDefault();
-            }
+        <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
+          {type === "edit" ? "Confirm" : "Add Contact"}
+        </Button>
+        <Button
+          fullWidth
+          variant="outlined"
+          sx={{ mt: 1 }}
+          onClick={() => {
+            handleFormState();
           }}
-          onChange={(e) =>
-            setNewContact({ ...newContact, phone: e.target.value })
-          }
-        />
-        <div>
-          <button type="submit">
-            {type === "edit" ? "Confirm" : "Add Contact"}
-          </button>
-        </div>
-      </form>
+        >
+          Cancel
+        </Button>
+      </Box>
     </div>
   );
 }

@@ -5,10 +5,6 @@ import { getUser, logOut } from "./features/userSlice";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -23,7 +19,6 @@ export default function App() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(getUser(arg));
-    console.log(user.length);
     setTimeout(() => {
       if (user.length == 0) {
         setError(true);
@@ -37,7 +32,6 @@ export default function App() {
   const handleLogOut = () => {
     dispatch(logOut());
   };
-  console.log(user);
 
   return (
     <div className="">
@@ -48,6 +42,7 @@ export default function App() {
               e.preventDefault();
               handleLogOut();
             }}
+            sx={{ float: "right" }}
           >
             Log out
           </Button>
@@ -108,22 +103,5 @@ export default function App() {
       )}
       ;
     </div>
-    // <div>
-    //   {user.length > 0 ? (
-    //     <Contacts userId={user[0].id} />
-    //   ) : (
-    //     <form onSubmit={handleSubmit}>
-    //       <input
-    //         type="text"
-    //         onChange={(e) => (arg.username = e.target.value)}
-    //       />
-    //       <input
-    //         type="password"
-    //         onChange={(e) => (arg.password = e.target.value)}
-    //       />
-    //       <button type="submit">Login</button>
-    //     </form>
-    //   )}
-    // </div>
   );
 }

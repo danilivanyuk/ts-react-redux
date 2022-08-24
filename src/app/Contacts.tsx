@@ -8,7 +8,19 @@ import {
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import ContactForm from "./ContactForm";
 import ContactView from "./ContactView";
-import FilteredContactsView from "./FilteredContactsView";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 interface IContactsComponentArg {
   userId: number;
@@ -34,7 +46,17 @@ export default function Contacts(parentData: IContactsComponentArg) {
   };
 
   return (
-    <div>
+    <Container>
+      <TextField
+        margin="normal"
+        fullWidth
+        name="Search"
+        label="Search"
+        type="text"
+        onChange={(e) => {
+          dispatch(filterContacts(e.target.value));
+        }}
+      />
       <div>
         {createContactForm ? (
           <ContactForm type="add" handleFormState={handleContactFormState} />
@@ -43,35 +65,54 @@ export default function Contacts(parentData: IContactsComponentArg) {
         )}
       </div>
       <div>
-        <input
-          type="text"
-          onChange={(e) => {
-            dispatch(filterContacts(e.target.value));
+        <Button
+          type="submit"
+          fullWidth
+          variant={createContactForm ? "outlined" : "contained"}
+          sx={{ mt: 3, mb: 2 }}
+          onClick={() => {
+            handleContactFormState();
           }}
-        />
+        >
+          {createContactForm ? "Cancel" : "Add Contact"}
+        </Button>
       </div>
-      <button
-        onClick={() => {
-          handleContactFormState();
-        }}
-      >
-        {createContactForm ? "Cancel" : "Add Contact"}
-      </button>
+
       <div>
-        {filteredContacts.length > 0 ? (
-          <FilteredContactsView filteredContacts={filteredContacts} />
-        ) : (
-          // <ContactsView contacts={contacts} />
-          // {Object(contacts).map()}
-          <div>
-            {Object(contacts).map((contact: any) => (
-              <div key={contact.id}>
-                <ContactView contact={contact} />
-              </div>
-            ))}
-          </div>
-        )}
+        <div>
+          <Box sx={{ width: "100%" }}>
+            <TableContainer component={Paper}>
+              <Table
+                sx={{ minWidth: 650, position: "relative" }}
+                aria-label="simple table"
+              >
+                <TableHead>
+                  <TableRow>
+                    {/* <TableCell></TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell> */}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object(
+                    filteredContacts.length > 0 ? filteredContacts : contacts
+                  ).map((contact: any) => (
+                    <TableRow
+                      key={contact.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <ContactView contact={contact} />
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }

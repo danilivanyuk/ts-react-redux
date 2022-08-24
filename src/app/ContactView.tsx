@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { deleteContact } from "../features/contactsSlice";
 import ContactForm from "./ContactForm";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+
 interface IContact {
   contact: any;
 }
@@ -16,40 +26,35 @@ export default function ContactView(parentData: IContact) {
     editContactForm ? setEditContactForm(false) : setEditContactForm(true);
   };
   return (
-    <div key={contact.id}>
+    <>
       {editContactForm ? (
-        <div>
-          <ContactForm
-            type="edit"
-            contact={contact}
-            handleFormState={handleContactEditFormState}
-          />
-          <button
-            onClick={() => {
-              handleContactEditFormState();
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+        <ContactForm
+          type="edit"
+          contact={contact}
+          handleFormState={handleContactEditFormState}
+        />
       ) : (
-        <div>
-          <div>{contact.name}</div>
-          <div>{contact.phone}</div>
-          <div>
-            <button
+        <>
+          <TableCell component="th" scope="row">
+            {contact.name}
+          </TableCell>
+          <TableCell align="right">{contact.phone}</TableCell>
+          <TableCell align="right">
+            <Button
               onClick={() => {
                 handleContactEditFormState();
               }}
             >
               Edit
-            </button>
-            <button onClick={() => dispatch(deleteContact(contact.id))}>
+            </Button>
+          </TableCell>
+          <TableCell align="right">
+            <Button onClick={() => dispatch(deleteContact(contact.id))}>
               Delete
-            </button>
-          </div>
-        </div>
+            </Button>
+          </TableCell>
+        </>
       )}
-    </div>
+    </>
   );
 }
