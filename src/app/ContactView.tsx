@@ -34,7 +34,6 @@ export default function ContactView(parentData: IContact) {
         </div>
       ) : (
         <div>
-          <div>{contact.id}</div>
           <div>{contact.name}</div>
           <div>{contact.phone}</div>
           <div>
