@@ -41,15 +41,19 @@ const contactsSlice = createSlice({
         return obj.id !== action.payload;
       });
     },
-    addContact(state, action: PayloadAction<any>) {
+    addContact(state, action: PayloadAction<IContact>) {
       state.contacts.push(action.payload);
     },
-    filterContacts(state, action: PayloadAction<any>) {
+    filterContacts(state, action: PayloadAction<IContact["name"]>) {
+      console.log(action.payload);
+
       state.filteredContacts = state.contacts.filter((contact) =>
-        contact.name.toLocaleLowerCase().includes(action.payload.toLowerCase())
+        contact.name
+          .toLocaleLowerCase()
+          .includes(action.payload.toLocaleLowerCase())
       );
     },
-    editContact(state, action: PayloadAction<any>) {
+    editContact(state, action: PayloadAction<IContact>) {
       const contactToEdit = state.contacts.find(
         (contact) => contact.id === action.payload.id
       );

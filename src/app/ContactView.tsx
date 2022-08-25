@@ -6,7 +6,12 @@ import TableCell from "@mui/material/TableCell";
 import Button from "@mui/material/Button";
 
 interface IContact {
-  contact: any;
+  contact: {
+    id: number;
+    userId: number;
+    name: string;
+    phone: string;
+  };
 }
 
 export default function ContactView(parentData: IContact) {

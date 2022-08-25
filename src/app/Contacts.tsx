@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import TableRow from "@mui/material/TableRow";
+import { IContact } from "../models/IContact";
 
 interface IContactsComponentArg {
   userId: number;
@@ -19,7 +20,6 @@ interface IContactsComponentArg {
 
 export default function Contacts(parentData: IContactsComponentArg) {
   const [createContactForm, setCreateContactForm] = useState(false);
-  const [editContactForm, setEditContactForm] = useState(false);
   const dispatch = useAppDispatch();
   const userId = parentData.userId;
   const { contacts, filteredContacts } = useAppSelector(
@@ -50,7 +50,11 @@ export default function Contacts(parentData: IContactsComponentArg) {
       />
       <div>
         {createContactForm ? (
-          <ContactForm type="add" handleFormState={handleContactFormState} />
+          <ContactForm
+            type="add"
+            handleFormState={handleContactFormState}
+            contact={{ id: 0, name: "", phone: "", userId: 0 }}
+          />
         ) : (
           ""
         )}
@@ -79,7 +83,7 @@ export default function Contacts(parentData: IContactsComponentArg) {
         }}
       >
         {Object(filteredContacts.length > 0 ? filteredContacts : contacts).map(
-          (contact: any) => (
+          (contact: IContact) => (
             <TableRow
               key={contact.id}
               sx={{

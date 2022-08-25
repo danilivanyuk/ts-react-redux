@@ -5,11 +5,17 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { IContact } from "../models/IContact";
 
 interface IContactForm {
   type: string;
-  contact?: any;
-  handleFormState?: any;
+  contact: {
+    id: number;
+    userId: number;
+    name: string;
+    phone: string;
+  };
+  handleFormState: Function;
 }
 
 export default function ContactForm(parentData: IContactForm) {
