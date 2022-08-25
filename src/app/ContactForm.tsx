@@ -35,15 +35,18 @@ export default function ContactForm(parentData: IContactForm) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const target = event.target as HTMLFormElement;
-    target.reset();
-    if (type === "add") {
-      setNewContact({ ...newContact, id: Math.random() * 10 });
-      dispatch(addContact(newContact));
-    } else {
-      dispatch(editContact(newContact));
+
+    if (newContact.name !== "" && newContact.phone !== "") {
+      if (type === "add") {
+        const target = event.target as HTMLFormElement;
+        target.reset();
+        setNewContact({ ...newContact, id: Math.random() * 10 });
+        dispatch(addContact(newContact));
+      } else {
+        dispatch(editContact(newContact));
+      }
+      handleFormState();
     }
-    handleFormState();
   };
 
   return (
@@ -93,16 +96,6 @@ export default function ContactForm(parentData: IContactForm) {
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
           {type === "edit" ? "Confirm" : "Add Contact"}
-        </Button>
-        <Button
-          fullWidth
-          variant="outlined"
-          sx={{ mt: 1 }}
-          onClick={() => {
-            handleFormState();
-          }}
-        >
-          Cancel
         </Button>
       </Box>
     </div>

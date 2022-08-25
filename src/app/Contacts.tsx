@@ -64,7 +64,7 @@ export default function Contacts(parentData: IContactsComponentArg) {
           type="submit"
           fullWidth
           variant={createContactForm ? "outlined" : "contained"}
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 1, mb: 2 }}
           onClick={() => {
             handleContactFormState();
           }}
