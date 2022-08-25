@@ -18,6 +18,8 @@ export default function App() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const target = event.target as HTMLFormElement;
+    target.reset();
     dispatch(getUser(arg));
     setTimeout(() => {
       if (user.length == 0) {
@@ -28,7 +30,6 @@ export default function App() {
       }
     }, 500);
   };
-  const displayError = () => {};
   const handleLogOut = () => {
     dispatch(logOut());
   };
@@ -76,6 +77,7 @@ export default function App() {
                 label="Name"
                 name="name"
                 autoFocus
+                autoComplete="off"
                 onChange={(e) => (arg.username = e.target.value)}
               />
               <TextField

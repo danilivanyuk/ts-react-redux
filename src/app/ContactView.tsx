@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { deleteContact } from "../features/contactsSlice";
 import ContactForm from "./ContactForm";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
 interface IContact {
@@ -25,7 +18,6 @@ export default function ContactView(parentData: IContact) {
   const handleContactEditFormState = () => {
     editContactForm ? setEditContactForm(false) : setEditContactForm(true);
   };
-  console.log(contact);
 
   return (
     <>

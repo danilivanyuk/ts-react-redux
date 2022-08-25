@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { addContact, editContact } from "../features/contactsSlice";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 interface IContactForm {
@@ -29,7 +26,6 @@ export default function ContactForm(parentData: IContactForm) {
         }
       : contact
   );
-  console.log(type, contact);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

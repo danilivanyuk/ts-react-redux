@@ -17,7 +17,11 @@ interface ILoginArgs {
   username: string;
   password: string;
 }
-const getUserURL = "http://localhost:3000/user?username=";
+const windowHref = window.location.href;
+const getUserURL =
+  windowHref === "http://localhost:3000/"
+    ? "http://localhost:3001/user?username="
+    : "http://localhost:3000/user?username=";
 
 export const getUser = createAsyncThunk(getUserURL, async (arg: ILoginArgs) => {
   try {
@@ -35,7 +39,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logOut(state) {
-      console.log(state.user);
       state.user = [];
     },
   },
@@ -46,6 +49,7 @@ const userSlice = createSlice({
       builder.addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.error = "";
       }),
       builder.addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
