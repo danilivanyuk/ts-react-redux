@@ -9,7 +9,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: [{ id: 1, username: "admin", password: "admin" }],
+  user: [],
   isLoading: false,
   error: "",
 };
