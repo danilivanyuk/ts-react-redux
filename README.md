@@ -6,8 +6,9 @@ Download source code.
 
 In the project directory:
 
-1. run DB `json-server --watch db.json`
-2. run app in development mode `npm start`
+1. Download dependencies `npm install`
+2. run DB `json-server --watch db.json`
+3. run app in development mode `npm start`
 
 # Accounts
 
