@@ -12,7 +12,7 @@ In the project directory:
 
 # Accounts
 
-1, username: admin, password: admin ,
-2, username: johndoe, password: A123456 ,
-3, username: samsmith, password: !vks2453 ,
-4, username: vasyapupkin, password: somepassword 
+1. username: admin, password: admin; \
+2. username: johndoe, password: A123456; \
+3. username: samsmith, password: !vks2453; \ 
+4. username: vasyapupkin, password: somepassword \
